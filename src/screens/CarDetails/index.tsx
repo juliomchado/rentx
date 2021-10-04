@@ -1,8 +1,18 @@
 import React from 'react';
+
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
+import { Accessory } from '../../components/Accessory';
 
 import { StatusBar } from 'react-native';
+
+import speedSvg from '../../assets/speed.svg';
+import accelerationSvg from '../../assets/acceleration.svg';
+import forceSvg from '../../assets/force.svg';
+import gasolineSvg from '../../assets/gasoline.svg';
+import exchangeSvg from '../../assets/exchange.svg';
+import peopleSvg from '../../assets/people.svg';
+
 import {
     Container,
     Header,
@@ -15,6 +25,7 @@ import {
     Rent,
     Period,
     Price,
+    Acessories,
     About
 } from './styles';
 
@@ -33,7 +44,7 @@ export function CarDetails() {
 
             <CarImages >
                 <ImageSlider
-                    imagesUrl={['https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_low/v1/editorial/vhs/Audi-RS5-Coupe.png']}
+                    imagesUrl={['https://www.gt-luxury.ae/wp-content/uploads/2021/04/2020-lamborghini-huracan-ev-495x350.png']}
                 />
             </CarImages>
 
@@ -49,6 +60,15 @@ export function CarDetails() {
                         <Price>R$ 580</Price>
                     </Rent>
                 </Details>
+
+                <Acessories>
+                    <Accessory name="380Km/h" icon={speedSvg} />
+                    <Accessory name="3.2s" icon={accelerationSvg} />
+                    <Accessory name="800hp" icon={forceSvg} />
+                    <Accessory name="Gasolina" icon={gasolineSvg} />
+                    <Accessory name="Auto" icon={exchangeSvg} />
+                    <Accessory name="2 pessoas" icon={peopleSvg} />
+                </Acessories>
 
                 <About>Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na
                     praça Real Maestranza de Sevilla.
