@@ -12,7 +12,27 @@ import {
     TotalCars,
 } from './styles';
 
+interface CarData {
+    brand: string;
+    name: string;
+    rent: {
+        period: string;
+        price: number;
+    };
+    thumbnail: string;
+}
+
 export function Home() {
+    const car: CarData = {
+        brand: 'Audi',
+        name: 'RS 5 Coupé',
+        rent: {
+            period: 'Ao dia',
+            price: 120,
+        },
+        thumbnail: 'https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_low/v1/editorial/vhs/Audi-RS5-Coupe.png'
+    }
+
     return (
         <Container>
             <StatusBar
@@ -34,7 +54,9 @@ export function Home() {
 
             </Header>
 
-            <CardCar />
+            <CardCar
+                data={car}
+            />
         </Container>
     );
 };
