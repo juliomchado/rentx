@@ -53,6 +53,8 @@ export function CardCar({ data }: Props) {
                 source={{ uri: data.thumbnail }}
                 resizeMode="contain"
             />
+
+
         </Container>
     );
 }
