@@ -5,6 +5,8 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Logo from '../../assets/logo.svg';
 import { CardCar } from '../../components/CardCar';
 
+
+import { useNavigation } from '@react-navigation/native';
 import {
     Container,
     Header,
@@ -12,6 +14,8 @@ import {
     TotalCars,
     CarList
 } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
+
 
 interface CarData {
     brand: string;
@@ -23,7 +27,11 @@ interface CarData {
     thumbnail: string;
 }
 
+
+
 export function Home() {
+    const navigation = useNavigation();
+
     const car: CarData = {
         brand: 'Audi',
         name: 'RS 5 Coupé',
@@ -32,6 +40,11 @@ export function Home() {
             price: 120,
         },
         thumbnail: 'https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_low/v1/editorial/vhs/Audi-RS5-Coupe.png'
+    }
+
+    function handleCarDetails() {
+
+        navigation.navigate('CarDetails')
     }
 
     return (
@@ -57,7 +70,10 @@ export function Home() {
 
             <CarList
                 data={[1, 2, 3, 4, 5, 6, 7, 8]}
-                renderItem={({ item }) => <CardCar data={car} />}
+                renderItem={({ item }) => <CardCar
+                    data={car}
+                    onPress={handleCarDetails}
+                />}
                 keyExtractor={(item) => String(item)}
             />
 

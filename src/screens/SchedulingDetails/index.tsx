@@ -18,6 +18,7 @@ import exchangeSvg from '../../assets/exchange.svg';
 import peopleSvg from '../../assets/people.svg';
 
 
+import { useNavigation } from '@react-navigation/native';
 import {
     Container,
     Header,
@@ -37,7 +38,7 @@ import {
     DateInfo,
     DateTitle,
     DateValue,
-    RentalPrice, 
+    RentalPrice,
     RentalPriceLabel,
     RentalPriceDetails,
     RentalPriceQuota,
@@ -47,6 +48,12 @@ import {
 export function SchedulingDetails() {
 
     const theme = useTheme();
+    const navigation = useNavigation();
+
+    function handleConfirmRental() {
+        navigation.navigate('SchedulingComplete');
+    };
+
     return (
 
         <Container>
@@ -122,7 +129,11 @@ export function SchedulingDetails() {
             </Content>
 
             <Footer>
-                <Button title="Confirmar" />
+                <Button
+                    title="Alugar agora"
+                    onPress={handleConfirmRental}
+                    color={theme.colors.success}
+                />
             </Footer>
         </Container>
     );
