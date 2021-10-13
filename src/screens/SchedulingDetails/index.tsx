@@ -54,6 +54,10 @@ export function SchedulingDetails() {
         navigation.navigate('SchedulingComplete');
     };
 
+    function handleBack() {
+        navigation.goBack();
+    }
+
     return (
 
         <Container>
@@ -63,7 +67,7 @@ export function SchedulingDetails() {
                 translucent
             />
             <Header>
-                <BackButton onPress={() => { }} />
+                <BackButton onPress={handleBack} />
             </Header>
 
             <CarImages >

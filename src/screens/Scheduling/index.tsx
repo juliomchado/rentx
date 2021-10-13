@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BackButton } from '../../components/BackButton';
 
 import { useTheme } from 'styled-components';
@@ -17,17 +17,42 @@ import {
 } from './styles';
 import { Button } from '../../components/Button';
 import { StatusBar } from 'react-native';
-import { Calendar } from '../../components/Calendar';
+import {
+    Calendar,
+    DayProps,
+    generateInterval,
+    MarkedDateProps
+} from '../../components/Calendar';
 import { useNavigation } from '@react-navigation/native';
+import theme from '../../styles/theme';
 
 export function Scheduling() {
+    const [markedDates, setMarkedDates] = useState<MarkedDateProps>({} as MarkedDateProps);
+    const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps);
 
-    const theme = useTheme();
     const navigation = useNavigation();
 
     function handleConfirmRental() {
         navigation.navigate('SchedulingDetails');
     };
+
+    function handleBack() {
+        navigation.goBack();
+    };
+
+    function handleChangeData(date: DayProps) {
+        let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+        let end = date;
+
+        if (start.timestamp > end.timestamp) {
+            start = end;
+            end = start;
+        }
+
+        setLastSelectedDate(end);
+        const interval = generateInterval(start, end);
+        setMarkedDates(interval);
+    }
 
     return (
         <Container>
@@ -38,7 +63,7 @@ export function Scheduling() {
                     backgroundColor="transparent"
                 />
                 <BackButton
-                    onPress={() => { }}
+                    onPress={handleBack}
                     color={theme.colors.shape}
                 />
 
@@ -68,7 +93,11 @@ export function Scheduling() {
             </Header>
 
             <Content>
-                <Calendar />
+                <Calendar
+                    markedDates={markedDates}
+                    onDayPress={handleChangeData}
+
+                />
             </Content>
 
             <Footer>
