@@ -40,6 +40,10 @@ export function CarDetails() {
 
     }
 
+    function handleBack() {
+        navigation.goBack();
+    }
+
 
 
     return (
@@ -51,7 +55,7 @@ export function CarDetails() {
                 translucent
             />
             <Header>
-                <BackButton onPress={() => { }} />
+                <BackButton onPress={handleBack} />
             </Header>
 
             <CarImages >

@@ -44,8 +44,8 @@ export function Home() {
     useEffect(() => {
         async function fetchCars() {
             try {
-                const response = await api.get('/cars');
-                setCars(response.data)
+                const { data } = await api.get<CarDTO[]>('/cars');
+                setCars(data)
             } catch (err) {
                 console.log(err)
             } finally {
