@@ -36,9 +36,11 @@ export function Home() {
 
     const navigation = useNavigation();
 
-    function handleCarDetails() {
+    function handleCarDetails(car: CarDTO) {
 
-        navigation.navigate('CarDetails')
+        navigation.navigate('CarDetails', {
+            car
+        })
     }
 
     useEffect(() => {
@@ -84,7 +86,7 @@ export function Home() {
                     renderItem={({ item }) =>
                         <CardCar
                             data={item}
-                            onPress={handleCarDetails}
+                            onPress={() => handleCarDetails(item)}
                         />
                     }
                 />
