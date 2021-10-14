@@ -3,6 +3,7 @@ import { StatusBar, FlatList } from 'react-native';
 
 import { api } from '../../services/api';
 import { CarDTO } from './../../dtos/CarDTO';
+import { AntDesign } from '@expo/vector-icons';
 
 import {
     Container,
@@ -13,7 +14,11 @@ import {
     Appointments,
     AppointmentsTitle,
     AppointmentsQuantity,
-
+    CarWrapper,
+    CarFooter,
+    CarFooterTitle,
+    CarFooterPeriod,
+    CarFooterDate,
 } from './styles';
 
 import { BackButton } from '../../components/BackButton';
@@ -26,6 +31,8 @@ interface CarProps {
     id: string;
     user_id: string;
     car: CarDTO;
+    startDate: string;
+    endDate: string;
 };
 
 export function MyCars() {
@@ -98,7 +105,22 @@ export function MyCars() {
                             keyExtractor={item => String(item.id)}
                             showsVerticalScrollIndicator={false}
                             renderItem={({ item }) => (
-                                <CardCar data={item.car} />
+                                <CarWrapper>
+                                    <CardCar data={item.car} />
+                                    <CarFooter>
+                                        <CarFooterTitle>Período</CarFooterTitle>
+                                        <CarFooterPeriod>
+                                            <CarFooterDate>{item.startDate}</CarFooterDate>
+                                            <AntDesign
+                                                name="arrowright"
+                                                size={20}
+                                                color={theme.colors.title}
+                                                style={{ marginHorizontal: 11 }}
+                                            />
+                                            <CarFooterDate>{item.endDate}</CarFooterDate>
+                                        </CarFooterPeriod>
+                                    </CarFooter>
+                                </CarWrapper>
 
                             )}
                         />

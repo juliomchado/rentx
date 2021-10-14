@@ -37,7 +37,6 @@ import {
     RentalPriceTotal,
 } from './styles';
 import { CarDTO } from '../../dtos/CarDTO';
-import { MarkedDateProps } from '../../components/Calendar';
 import { getAccessoryIcon } from '../../utils/getAcessoryIcon';
 import { getPlatformDate } from '../../utils/getPlatformDate';
 import { format } from 'date-fns';
@@ -52,7 +51,6 @@ interface RentalPeriod {
     start: string;
     end: string;
 }
-
 
 export function SchedulingDetails() {
     const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
@@ -77,6 +75,8 @@ export function SchedulingDetails() {
         await api.post('schedules_byuser', {
             user_id: 1,
             car,
+            startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
+            endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyy')
         });
 
         await api.put(`/schedules_bycars/${car.id}`, {
