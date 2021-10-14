@@ -17,7 +17,7 @@ import {
 
 import { CarDTO } from '../../dtos/CarDTO';
 import { api } from '../../services/api';
-import { Load } from '../Load';
+import { Load } from '../../components/Load';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 

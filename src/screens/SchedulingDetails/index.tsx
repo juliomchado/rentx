@@ -53,6 +53,7 @@ interface RentalPeriod {
 }
 
 export function SchedulingDetails() {
+    const [loading, setLoading] = useState(false);
     const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
 
     const theme = useTheme();
@@ -65,6 +66,7 @@ export function SchedulingDetails() {
     const rentTotal = Number(dates.length * car.rent.price);
 
     async function handleConfirmRental() {
+        setLoading(true)
         const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
 
         const unavailable_dates = [
@@ -83,10 +85,10 @@ export function SchedulingDetails() {
             id: car.id,
             unavailable_dates
         }).then(() => navigation.navigate('SchedulingComplete'))
-            .catch(() => Alert.alert('Não foi possível confirmar o agendamento'));
-
-
-
+            .catch(() => {
+                Alert.alert('Não foi possível confirmar o agendamento');
+                setLoading(false);
+            });
     };
 
     function handleBack() {
@@ -131,19 +133,20 @@ export function SchedulingDetails() {
                         <Price>R$ {car.rent.price}</Price>
                     </Rent>
                 </Details>
-
-                <Accessories>
-                    {
-                        car.accessories.map(accessory => {
-                            <Accessory
-                                key={accessory.type}
-                                name={accessory.name}
-                                icon={getAccessoryIcon(accessory.type)}
-                            />
-                        })
-                    }
-
-                </Accessories>
+                {
+                    car.accessories &&
+                    <Accessories>
+                        {
+                            car.accessories.map(accessory => (
+                                <Accessory
+                                    key={accessory.type}
+                                    name={accessory.name}
+                                    icon={getAccessoryIcon(accessory.type)}
+                                />
+                            ))
+                        }
+                    </Accessories>
+                }
 
                 <RentalPeriod>
                     <CalendarIcon>
@@ -184,6 +187,8 @@ export function SchedulingDetails() {
                     title="Alugar agora"
                     onPress={handleConfirmRental}
                     color={theme.colors.success}
+                    enabled={!loading}
+                    loading={loading}
                 />
             </Footer>
         </Container>

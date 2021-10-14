@@ -25,7 +25,7 @@ import { BackButton } from '../../components/BackButton';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 import { CardCar } from '../../components/CardCar';
-import { Load } from '../Load';
+import { Load } from '../../components/Load';
 
 interface CarProps {
     id: string;
