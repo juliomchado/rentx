@@ -21,18 +21,6 @@ import { Load } from '../../components/Load';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 
-interface CarData {
-    brand: string;
-    name: string;
-    rent: {
-        period: string;
-        price: number;
-    };
-    thumbnail: string;
-}
-
-
-
 export function Home() {
     const [cars, setCars] = useState<CarDTO[]>([]);
     const [loading, setLoading] = useState(true);
