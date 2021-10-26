@@ -34,9 +34,9 @@ import {
 
 import { CarDTO } from '../../dtos/CarDTO';
 import { api } from '../../services/api';
-import { Load } from '../../components/Load';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
+import { LoadAnimation } from '../../components/LoadAnimation';
 
 export function Home() {
     const [cars, setCars] = useState<CarDTO[]>([]);
@@ -127,7 +127,7 @@ export function Home() {
                 </HeaderContent>
 
             </Header>
-            {loading ? <Load /> : (
+            {loading ? <LoadAnimation /> : (
                 <CarList
                     data={cars}
                     keyExtractor={(item) => item.id}
